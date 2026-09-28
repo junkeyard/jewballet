@@ -7,3 +7,9 @@ coverage
 .DS_Store
 npm-debug.log*
 tsconfig.tsbuildinfo
+
+# 로컬 테스트 DB 도구(PostgREST 바이너리)·Playwright 결과물
+.testdb
+test-results
+playwright-report
+blob-report

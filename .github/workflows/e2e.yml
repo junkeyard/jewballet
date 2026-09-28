@@ -1,0 +1,50 @@
+name: 검사 (lint · 타입 · audit · 빌드 · E2E)
+
+# 실제 Supabase·비밀값 없이 돈다. E2E는 러너의 Postgres 16 + PostgREST(자동 다운로드)로
+# 로컬 테스트 DB를 띄워 supabase/001→003→004→005→006을 적용한 뒤 실행한다.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm audit --audit-level=high
+
+      - name: Playwright 브라우저 (Chromium · WebKit)
+        run: npx playwright install --with-deps chromium webkit
+
+      - name: E2E (db · mobile-webkit · mobile-chromium · desktop-chromium)
+        run: npx playwright test
+
+      - name: 결과물 업로드 (리포트·스크린샷)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-report
+          path: |
+            app/playwright-report
+            app/test-results
+            docs/screens
+          retention-days: 14
