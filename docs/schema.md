@@ -35,7 +35,7 @@
 |---|---|---|
 | id | uuid PK | `/member?id=`에 그대로 쓰인다 |
 | name | text | |
-| phone | text | **unique**. 숫자만 저장(`01012345678`) |
+| phone | text | **unique**. 숫자만 저장(`010` + 8자리, 하이픈 없음) |
 | phone_last4 | text | 체크인 검색 키. 인덱스 있음. **unique 아님**(뒤 4자리 중복 가능) |
 | class_group_id | uuid → class_groups | on delete set null |
 | join_date | date | 기본 오늘 |
