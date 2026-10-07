@@ -1,6 +1,6 @@
 import path from "node:path";
 import type { Page, TestInfo } from "@playwright/test";
-import { adminLogin, codeInput, expect, test } from "./support/fixtures";
+import { adminLogin, codeInput, expect, expectAdminSignedIn, test } from "./support/fixtures";
 import { createGroup, createMember, createPlan, db, grantEntitlement } from "./support/db";
 
 // 폭별 스크린샷 + 가로 넘침 자동 검사.
@@ -137,6 +137,7 @@ test("관리자 화면 스크린샷", async ({ page }, testInfo) => {
   ] as const) {
     await capture(page, testInfo, name, async () => {
       await page.goto(url);
+      await expectAdminSignedIn(page);
     });
   }
 });
