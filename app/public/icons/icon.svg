@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- 쥬발레 앱 아이콘 원본. 색은 design.md 토큰(--accent #8B5A3C, --bg #FAF6F0).
+       글꼴에 기대지 않도록 글자 대신 도형으로 그린다(J 모양).
+       PNG는 scripts/generate-icons.mjs가 이 파일에서 만든다. -->
+  <rect width="512" height="512" fill="#8B5A3C"/>
+  <g transform="translate(-4 8)">
+  <path d="M300 128 v176 a76 76 0 0 1 -152 0" fill="none" stroke="#FAF6F0" stroke-width="44" stroke-linecap="round"/>
+  <path d="M252 118 h96" stroke="#FAF6F0" stroke-width="20" stroke-linecap="round"/>
+  </g>
+</svg>
